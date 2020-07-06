@@ -1,0 +1,45 @@
+What are the build requirements?
+
+2) What are the new stage in the pipelines.
+
+3) What are the newer syntax vs older syntax
+
+Exercises.
+4) Prepare a new jenkins pipeline project. 
+a) By creating jenkins file outside the pipeline project. 
+b) By creating jenkins file within the project. 
+
+
+5) Create a shell script that creates pipelines automatically based on a single repo.
+
+16:25
+
+a) Copy the xml file for one branch.
+need to replace this with the name of the project. 
+curl  -s https://api.github.com/users/apulijala/repos
+
+
+<url>git@github.com:apulijala/simple-pipeline-practice-jenkinsfile.git</url> 
+
+c) get a list of repostiories from the git. 
+curl  -s https://api.github.com/users/apulijala/repos
+
+b) Copy the jenkins cli jar file into the server.
+
+Did the copy of 
+cli-2.235.1.jar
+
+
+
+command is.
+
+java -jar cli-2.235.1.jar  -s http://localhost:8080 -auth admin:119de55e2f199250d454bcfb8130422755 get-job simple-pipelin
+
+c) get all repos from git ending in website.
+
+d) Run the jenkins cli to add, update jobs. 
+java -jar cli-2.235.1.jar  -s http://localhost:8080 -auth admin:119de55e2f199250d454bcfb8130422755 get-job simple-pipeline
+
+d) 
+
+

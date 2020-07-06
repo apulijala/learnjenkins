@@ -1,0 +1,244 @@
+Installing jenkins.
+yum install git
+ssh-keygen 
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUQKzG6+WF7MbidgLWQmng11aEyPJf0JTJ92P2Btuv1XEfc9LMxDVsgSnuKx3UQnUdjNxLrUUkO/ZwHlif6uXddBviuUhPZQw0Qs8yKiNxm1NKpFYqFblm96fkZQELjl7lr55EYkXufXefEUUXzDZ+mzIPoCxT0Baduf+3Ya6FhQQNMdxFbsBYp2MpCRFNHkPHY2PWLR7F5mTQ+7LlzEwJmKqQJ2Ai2yAYG/R1iiYLvAca2EEpprZ0T9JtRDC0e2+RrgzROUrchNiD+YZuQww9DYgFQHe9r2ba7K2Zihaq46SWkq1sJ2ojyXX48KneCAuOuq8wEwigBcnvudPyY0N7 ec2-user@ip-172-31-1-166.eu-west-2.compute.internal
+
+
+sudo mkff.ext4 /dev/xvdf
+sudo vi /etc/fstab # create an entry dev/xvdf /var/lib/jenkins ext4  defaults 0 0
+sudo mkdir -p /var/lib/jenkins
+sudo yum -y install java-1.8.0-openjdk
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo // add a remo
+
+
+
+
+sudo fdisk -l | grep $(grep /var/lib/jenkins /etc/fstab  | awk '{print $1}')
+cat /etc/yum.repos.d/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum install -y jenkins
+df -h 
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum install -y jenkins
+                              
+sudo yum install -y https://pkg.jenkins.io/redhat/jenkins.io.key
+  
+                              
+for port 80 
+
+sudo rpm -ihv https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-12.noarch.rpm
+sudo yum -y install nginx
+sudo vi /etc/nginx/nginx.conf
+
+upstream jenkins {
+   server 127.0.0.1:8080
+}
+Kubernetes on AWS
+Kubernetes in Action
+Mastering Kubernetes
+
+Setting reverse proxy
+sudo setsebool httpd_can_network_connect 1 # Otherwise will not work.
+And configure the virtual server. 
+
+sudo setebool httpd_can_network_connect 1
+upstream backend {
+    server 172.31.28.245:8080;
+}
+
+server {
+
+        location /jenkins
+        {
+                proxy_pass http://backend;
+        }
+}
+sudo yum install -y java-1.8.0-openjdk
+
+sudo systemctl start jenkins
+
+sudo yum install -y java-1.8.0-openjdk
+sudo yum install -y git
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum install -y jenkins
+sudo systemctl start jenkins
+
+
+data "template_file" "init" {
+  template = "${file("${path.module}/install_jenkins.sh")}"
+  vars = {
+    dev_name = aws_volume_attachment.ebs_att.device_name 
+  }
+}
+
+
+
+
+
+Kubernetes certified administrator.
+
+if interview comes through.
+Kubernetes in 7 Days
+Conquering Git: Advanced Training Guide
+
+ Unit nginx.service has begun starting up.
+Jun 27 14:19:37 ip-172-31-28-245.eu-west-2.compute.internal nginx[17948]: nginx: [emerg] unexpected "}" in /etc/nginx/conf.d/nginx.conf:4
+Jun 27 14:19:37 ip-172-31-28-245.eu-west-2.compute.internal nginx[17948]: nginx: configuration file /etc/nginx/nginx.conf test failed
+Jun 27 14:19:37 ip-172-31-28-245.eu-west-2.compute.internal systemd[1]: nginx.service: Control process exited, code=exited status=1
+Jun 27 14:19:37 ip-172-31-28-245.eu-west-2.compute.internal systemd[1]: nginx.service: Failed with result 'exit-code'.
+Jun 27 14:19:37 ip-172-31-28-245.eu-west-2.compute.internal systemd[1]: Failed to start The nginx HTTP and reverse proxy server.
+
+
+
+server {
+        listen       80 default;
+        server_name  jenkins.course;
+
+        access_log /var/log/nginx/jenkins.access.log
+        error_log /var/log/nginx/jenkins.error.log
+
+        proxy_buffers 16 64k;
+        proxy_buffer_size 128k;
+
+        location / {
+                proxy_pass http://jenkins;
+                proxy_next_upstream error tiemout invalid_header http_500 http_502 http_503 http_504;
+                proxy_redirect off;
+
+                proxy_set_header        Host                    $host;
+                proxy_set_header        X-Real-IP               $remote_addr;
+                proxy_set_header        X-Forwarded-For         $proxy_add_x_forwarded_for;
+                proxy_set_header        X-Forwarded-Proto       https;
+
+
+        }
+
+    }
+    
+16:11 - 16:53
+    
+Jenkins installation.    
+----------------
+Dependency pakages.
+1)     EBS Volume + EC2 instance. with correct security groups. Done.
+2)     Install git as a tool. Done
+3)     Install openjdk. Done
+
+
+Jenkins,
+1)Using yum repo 
+2) Using tomcat and jenkins and setting up home directory.
+3) using docker container
+
+    
+Automating Jenkins Installation.
+------------------------------------
+Disable Jenkins Plugins.
+
+from /etc/sysconfig/jenkins = 
+add to line. 
+JENKINS_JAVA_OPTIONS = -Djenkins.install.runSetupWizard=false
+
+2) Create a directory called /var/lib/jenkins/init.groovy.d
+/var/lib/jenkins/init.groovy.d/security.groovy
+
+3) lalitha_shiva
+eu-west-2a
+aws ec2 describe-instances --query "Reservations[*].Instances[?State.Name == 'running'].PublicDnsName[]" --output text
+
+
+sudo vi /etc/fstab
+/dev/xvdf /var/lib/jenkins ext4   defaults 0 0 (Entry in fstab)
+sudo mkfs.ext4 /dev/xvdf
+sudo mkdir -p /var/lib/jenkins
+sudo mount -a
+
+verification
+-----------------
+df -h
+
+Jenkins Installation.
+------------------
+Install jenkins.
+---------------------
+
+sudo yum install wget
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+ls -ld /var/lib/jenkins
+
+Install Nginx
+--------------
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+sudo getsebool httpd_can_network_connect
+
+38, 57
+sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
+sudo sed -i.bak '38, 57 d' /etc/nginx/nginx.conf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Common problems and errors.
+
+For installing docker on Red hat 8 on AWS follow the steps. 
+Important to follow the steps as noted and it sholuld be done on  a fresh isntance.
+
+1) sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf makecache
+sudo dnf install --nobest docker-ce
+sudo systemctsl status docker
+sudo systemctl start docker
+sudo docker container run hello-world
+sudo systemctsl status docker
+sudo systemctl start docker
+sudo docker container run -it   hello-world
+
+2) For configuring selinux, it is important to  enable se linx.
+
+sudo setsebool httpd_can_network_connect 1 # Otherwise will not work.
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+
+

@@ -1,0 +1,5 @@
+awsinaction.pem
+*id_rsa*
+*__pycache__*
+*jar*
+*.terraform*

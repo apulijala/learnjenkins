@@ -1,0 +1,26 @@
+Distributed Jenkins behind HA Proxy
+------------------------------------
+
+1) Create a distributed jenkins server. 
+Only jobs folder should be shared on EFS volume. 
+
+2) Test it by creating jobs and then 
+
+Common problems and errors.
+------------------------
+
+1) for the efs volume, forgot to open the port 2049
+2) need to install nfs-utils to use mount command on nfs-stab.
+
+
+
+
+
+
+
+    
+    
+    
+    
+
+

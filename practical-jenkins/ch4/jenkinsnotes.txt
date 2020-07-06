@@ -1,0 +1,17 @@
+What are the build requirements?
+
+2) What are the new stage in the pipelines.
+
+3) What are the newer syntax vs older syntax
+
+Exercises.
+4) Prepare a new jenkins pipeline project. 
+a) By creating jenkins file outside the pipeline project. 
+b) By creating jenkins file within the project. 
+
+
+5) Create a shell script that creates multi branch pipelines automatically. 
+
+
+
+git@github.com:apulijala/simple-pipeline-practice-jenkinsfile.git

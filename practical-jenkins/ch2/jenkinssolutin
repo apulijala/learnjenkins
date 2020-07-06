@@ -1,0 +1,90 @@
+Distributed Jenkins behind HA Proxy
+------------------------------------
+
+1) Create a distributed jenkins server. 
+Only jobs folder should be shared on EFS volume. 
+
+2) Test it by creating jobs and then 
+
+Solution:
+1) Created isntances , ebs volumes in eu-west-1a Created efs volume and for jenkins created, the text. 
+logged into each machine using command below. 
+ssh -i awsinaction.pem ec2-user@$(aws ec2 describe-instances --query "Reservations[*].Instances[?State.Name == 'running'].PublicDnsName[]" --output text | awk '{print $2}') 
+Ran automat_jhenkins.sh which mounts ebs volume, install jenkins, install nginx and configure a reverse proxy. 
+
+2) logged into jekins for initial password . 
+ssh -i awsinaction.pem ec2-user@$(aws ec2 describe-instances --query "Reservations[*].Instances[?State.Name == 'running'].PublicDnsName[]" 
+--output text | awk '{print $2}') sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+tyou need not ssh into machine. You can simply run the command. sudo cat /var/lib/jenkins/secrets/intialAdminPassword.
+
+3) Finally mounted efs volume. 
+with script below.
+sudo mkdir -p /var/lib/jenkins/jobs
+sudo yum install -y nfs-utils
+Opening port number 2049
+
+# Open port number 2049 in the securiyt group for efs.
+# This id should not be used 
+
+# Creating nfs volume. 
+sudo bash -c 'cat >> /etc/fstab <<EOF
+fs-04067ff5.efs.eu-west-2.amazonaws.com:/ /var/lib/jenkins/jobs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,_netdev 0 0
+EOF'
+sudo mount -a
+
+4)  Createcd the nfs volume. 
+
+5) On trestaring. had to change the permissions. 
+sudo chown -R jenkins:jenkins /var/lib/jenkins/jobs/
+ 
+Changed setsebool settings to start the network.  
+sudo setsebool httpd_can_network_connect 1
+
+Restarted jenkins. 
+sudo systemctl restart jenkins. 
+
+
+5) One one of the system instead of jenkins user there is jenkins-user. modified it to jenkins.
+Still having build failures on python job.
+
+6) 
+Bash script to restart jenkins every min on passive master. 
+ec2-52-56-171-5.eu-west-2.compute.amazonaws.com will be passive. jenkins-instane2 will be the one. 
+
+eu-west-2a  
+
+This is a good practice book.
+Continuous Delivery with Docker and Jenkins
+
+
+Monitoring Jenkins.
+---------------
+
+Common problems and errors.
+------------------------
+http://ec2-3-10-226-37.eu-west-2.compute.amazonaws.com/
+
+
+1) for the efs volume, forgot to open the port 2049
+2) need to install nfs-utils to use mount command on nfs-stab.
+
+ec2-18-130-227-27.eu-west-2.compute.amazonaws.com
+ec2-3-10-226-37.eu-west-2.compute.amazonaws.com
+To login to machine without hard cocding machine name
+
+?State.Name == 'running' acts as a filter on the machines. 
+
+3) when stopping and restarting the machine. you need to remove known_hosts or empty it. 
+
+4) Did not work on red hat enterprise version. So had to use 
+Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-032598fcc7e9d1c7a
+and yum commands worked. later task is to understand app sync.
+
+sudo mysql -e "CREATE DATABASE graphite;"
+[ec2-user@ip-172-31-25-158 ~]$ sudo mysql -e "GRANT ALL PRIVILEGES ON graphite.* TO 'graphite'@'localhost' IDENTIFIED by 'j3nk1n$db'"
+
+
+
+
+
+ 

@@ -1,0 +1,44 @@
+pipeline {
+    agent{
+        label "jenkins-slave-ssh"
+    }
+
+    
+
+    stages{
+        
+        stage("Code Checkout"){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '217f477c-ae18-4d4c-bf08-de299616156b', url: 'git@github.com:apulijala/python-project.git']]])
+            }
+        }
+
+        stage("Build") {
+            parallel {
+                stage('First Test') {
+                    steps {
+                        echo 'Run First Test here ....'
+                    }
+                }
+
+                stage('Second Test') {
+                    steps {
+                        echo 'Run Second Test here ....'
+                    }
+                }
+
+                stage('Third test') {
+                    steps {
+                        echo 'Third test here.'
+                        
+                    }
+
+                }
+
+            }
+        }
+
+    }
+     
+       
+}
